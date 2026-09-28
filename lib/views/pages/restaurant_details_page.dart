@@ -13,53 +13,87 @@ class RestaurantDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Image.network(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Image.network(
                     'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=1200',
-                  height: 235,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+                    height: 235,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
 
-                Positioned(
-                  top: 40,
-                  left: 16,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.black54,
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        )
+                  Positioned(
+                    top: 40,
+                    left: 16,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black54,
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          )
+                      ),
                     ),
                   ),
-                ),
-                
-                Transform.translate(
-                  offset: const Offset(0, -32),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Card(
+                ],
+              ),
+              Transform.translate(
+                offset: const Offset(0, -32),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Teste')
+                          Text(
+                            restaurant.name,
+                            style: const TextStyle(
+                                fontSize: 21,
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
+
+                          const SizedBox(height: 6),
+
+                          const Text(
+                            'Entrega rastreável - 2,0 km - Min. R\$ 25,00',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey
+                            ),
+                          ),
+
+                          const Divider(height: 25),
+
+                          Row(
+                            children: [
+                              const Icon(Icons.star, size: 16),
+
+                              const SizedBox(width: 6),
+
+                              Text(
+                                '${restaurant.rating} (${restaurant.reviewsCount} avaliações)',
+                                style: const TextStyle(fontSize: 13),
+                              )
+                            ],
+                          )
                         ],
                       ),
                     ),
                   ),
-                )
-              ],
-            )
-          ],
-        ),
-      )
+                ),
+              )
+            ],
+          ),
+        )
     );
   }
 }
