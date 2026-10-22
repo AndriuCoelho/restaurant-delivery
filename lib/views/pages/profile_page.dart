@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:guia_restaurantes/models/profile_menu_item.dart';
+import 'package:guia_restaurantes/views/widgets/profile_menu_tile.dart';
 
 class ProfilePage extends StatelessWidget {
 
-  static const _ifoodRed = Color(0xFFEA1D2C);
+  static const _ifoodRed = Color(0XFFEA1D2C);
 
   const ProfilePage({
     super.key
@@ -11,12 +13,19 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _buildHeader(),
+                  const SizedBox(height: 16),
+                  _buildLoginButton(),
+                  const SizedBox(height: 16),
+                  _buildMenu(),
+                  const SizedBox(height: 24)
                 ],
               ),
             )
@@ -25,15 +34,43 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildHeader() {
-    return Row(
+    return const Row(
       children: [
         Expanded(
-          child: Text(
-            'Falta pouco para matar a sua fome!',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-          ),
+            child: Text(
+              'Falta pouco para \nmatar a sua fome!',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+            )
         ),
-        Icon(Icons.shopping_bag, size: 90, color: _ifoodRed)
+        Icon(Icons.shopping_bag, size: 90, color: _ifoodRed),
+      ],
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return OutlinedButton(
+      onPressed: () {
+        // no futuro: abrir a tela de cadastro
+      },
+      style: OutlinedButton.styleFrom(
+        foregroundColor: _ifoodRed,
+        side: const BorderSide(color: _ifoodRed),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+      child: const Text(
+        'Entrar ou cadastrar-se',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  Widget _buildMenu() {
+    return Column(
+      children: [
+        for (var item in profileMenuMock)
+          ProfileMenuTile(item: item),
+        const Divider(height: 1),
       ],
     );
   }
