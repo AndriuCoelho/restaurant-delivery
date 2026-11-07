@@ -38,14 +38,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Guia de Restaurantes',
       home: Scaffold(
-        body: _pages[_selectedIndex],
+          body: _pages[_selectedIndex],
         bottomNavigationBar: NavigationBar(
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
             destinations: [
               NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Inicio'),
               NavigationDestination(icon: Icon(Icons.search), label: 'Busca'),
@@ -57,3 +57,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
