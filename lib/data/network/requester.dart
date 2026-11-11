@@ -12,6 +12,15 @@ class Requester {
     )
   );
 
+  Future<dynamic> get(String path) async {
+    try {
+      final response = await _dio.get(path);
+      return response.data;
+    } on DioException catch (e) {
+      throw RequestException(_messageFor(e));
+    }
+  }
+
   Future<dynamic> post(String path, Map<String, dynamic> body) async {
     try {
       final response = await _dio.post(path, data: body);

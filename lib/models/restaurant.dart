@@ -1,81 +1,41 @@
 class Restaurant {
+  final String id;             // NOVO
   final String name;
+  final String category;       // NOVO
   final String initials;
-  final String avatarColorHex;
   final double rating;
-  final int reviewsCount;
-  final int deliveryTimeMin;
-  final int deliveryTimeMax;
+  final int ratingCount;        // era reviewsCount
+  final String deliveryTime;    // era deliveryTimeMin + deliveryTimeMax
   final double deliveryFee;
+  final String description;     // NOVO
 
   const Restaurant({
+    required this.id,
     required this.name,
+    required this.category,
     required this.initials,
-    required this.avatarColorHex,
     required this.rating,
-    required this.reviewsCount,
-    required this.deliveryTimeMin,
-    required this.deliveryTimeMax,
-    required this.deliveryFee
+    required this.ratingCount,
+    required this.deliveryTime,
+    required this.deliveryFee,
+    required this.description
   });
+
+  factory Restaurant.fromJson(Map<String, dynamic> json) {
+    return Restaurant(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      category: json['category'] as String,
+      initials: json['initials'] as String,
+      rating: (json['rating'] as num).toDouble(),
+      ratingCount: json['rating_count'] as int,
+      deliveryTime: json['delivery_time'] as String,
+      deliveryFee: (json['delivery_fee'] as num).toDouble(),
+      description: json['description'] as String,
+    );
+  }
+
+  String get deliveryInfo =>
+      '$deliveryTime - R\$ ${deliveryFee.toStringAsFixed(2).replaceAll('.', ',')}';
+
 }
-
-const List<Restaurant> restaurantMock = [
-  Restaurant(
-      name: 'La pasta - Estância',
-      initials: 'LP',
-      avatarColorHex: '0xFFFFE14D',
-      rating: 4.8,
-      reviewsCount: 320,
-      deliveryTimeMin: 35,
-      deliveryTimeMax: 45,
-      deliveryFee: 9.00
-  ),
-  Restaurant(
-      name: 'Sushi Go',
-      initials: 'SG',
-      avatarColorHex: '0xFFFA8072',
-      rating: 5.0,
-      reviewsCount: 510,
-      deliveryTimeMin: 40,
-      deliveryTimeMax: 45,
-      deliveryFee: 7.00
-  ),
-];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
