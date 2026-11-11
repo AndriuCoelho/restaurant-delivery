@@ -8,6 +8,19 @@ class RestaurantCard extends StatelessWidget {
 
   const RestaurantCard({ super.key, required this.restaurant });
 
+  static const _avatarColors = [
+    Color(0xFFFFE14D),   // amarelo
+    Color(0xFFFA8072),   // salmão
+    Color(0xFF2E8B3A),   // verde
+    Color(0xFF6FA8FF),   // azul
+    Color(0xFFB98AF2),   // lilás
+  ];
+
+  Color get _avatarColor {
+    final number = int.tryParse(restaurant.id) ?? 1;
+    return _avatarColors[(number -1) % _avatarColors.length];
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -25,7 +38,7 @@ class RestaurantCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 32,
-                backgroundColor: Color(int.parse(restaurant.avatarColorHex)),
+                backgroundColor: _avatarColor,
                 child: Text(restaurant.initials, style: TextStyle(fontWeight: FontWeight.bold)),
               ),
 
@@ -41,7 +54,7 @@ class RestaurantCard extends StatelessWidget {
                       SizedBox(width: 4),
                       Text('${restaurant.rating}', style: TextStyle(fontWeight: FontWeight.w500)),
                       SizedBox(width: 4),
-                      Text('${restaurant.reviewsCount}', style: TextStyle(color: Colors.grey))
+                      Text('${restaurant.ratingCount}', style: TextStyle(color: Colors.grey))
                     ],
                   ),
                   Text('40-50 min - R\$ 7,00', style: TextStyle(color: Colors.grey[70]))
@@ -54,5 +67,4 @@ class RestaurantCard extends StatelessWidget {
       ),
     );
   }
-
 }
