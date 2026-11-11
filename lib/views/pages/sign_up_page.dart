@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guia_restaurantes/viewmodels/sign_up_viewmodel.dart';
+import 'package:guia_restaurantes/views/pages/login_page.dart';
 
 class SignUpPage extends StatefulWidget {
 
@@ -181,7 +182,10 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _buildLoginLink(BuildContext context) {
     return TextButton(
         onPressed: () {
-          // Ação do botão
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
         },
         style: TextButton.styleFrom(foregroundColor: SignUpPage._ifoodRed),
         child: const Text('Já tenho uma conta')
